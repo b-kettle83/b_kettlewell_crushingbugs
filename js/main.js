@@ -3,6 +3,7 @@ console.log('JS file connected');
 let theButtons = document.querySelectorAll('#buttonHolder img'),
     puzzleBoard = document.querySelector('.puzzle-board'),
     puzzlePieces = document.querySelectorAll('.puzzle-pieces img'),
+    originalContainer = document.querySelector('.puzzle-pieces'),
     tlPiece = document.querySelector('.puzzle-pieces #tl'),
     trPiece = document.querySelector('.puzzle-pieces #tr'),
     blPiece = document.querySelector('.puzzle-pieces #bl'),
@@ -18,6 +19,8 @@ let theButtons = document.querySelectorAll('#buttonHolder img'),
         trPiece.src = `images/topRight${this.id}.jpg`;
         blPiece.src = `images/bottomLeft${this.id}.jpg`;
         brPiece.src = `images/bottomRight${this.id}.jpg`;
+
+        puzzlePieces.forEach(piece => originalContainer.appendChild(piece));
     }
 
     function handlesStartDrag() {
