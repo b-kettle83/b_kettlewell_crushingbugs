@@ -3,13 +3,21 @@ console.log('JS file connected');
 let theButtons = document.querySelectorAll('#buttonHolder img'),
     puzzleBoard = document.querySelector('.puzzle-board'),
     puzzlePieces = document.querySelectorAll('.puzzle-pieces img'),
+    tlPiece = document.querySelector('.puzzle-pieces #tl'),
+    trPiece = document.querySelector('.puzzle-pieces #tr'),
+    blPiece = document.querySelector('.puzzle-pieces #bl'),
+    brPiece = document.querySelector('.puzzle-pieces #br'),
     dropZones = document.querySelectorAll('.drop-zone'),
+    zoneTaken = false,
     draggedPiece;
 
 
     function changeBGimage() {
         puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
-        //Look for bug fix here
+        tlPiece.src = `images/topLeft${this.id}.jpg`;
+        trPiece.src = `images/topRight${this.id}.jpg`;
+        blPiece.src = `images/bottomLeft${this.id}.jpg`;
+        brPiece.src = `images/bottomRight${this.id}.jpg`;
     }
 
     function handlesStartDrag() {
