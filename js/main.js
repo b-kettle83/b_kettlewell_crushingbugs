@@ -9,9 +9,9 @@ let theButtons = document.querySelectorAll('#buttonHolder img'),
     blPiece = document.querySelector('.puzzle-pieces #bl'),
     brPiece = document.querySelector('.puzzle-pieces #br'),
     dropZones = document.querySelectorAll('.drop-zone'),
-    zoneTaken = false,
+    originalZone,
+    zoneTaken,
     draggedPiece;
-
 
     function changeBGimage() {
         puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
@@ -21,11 +21,15 @@ let theButtons = document.querySelectorAll('#buttonHolder img'),
         brPiece.src = `images/bottomRight${this.id}.jpg`;
 
         puzzlePieces.forEach(piece => originalContainer.appendChild(piece));
+
+        dropZones.forEach(zone => zone.zoneTaken = false);
     }
 
     function handlesStartDrag() {
         console.log('Started Dragging this piece: ', this);
         draggedPiece = this;
+
+        originalZone = this.parentElement;
     }
 
     function handleDragOver(e) {
@@ -34,11 +38,21 @@ let theButtons = document.querySelectorAll('#buttonHolder img'),
     }
 
     function handleDrop(e) {
-        console.log('dropped');
+        
         e.preventDefault();
-        //Look for bug fix here
 
-        this.appendChild(draggedPiece);
+        if (this.zoneTaken === true) {
+            console.log('Zone Taken');
+        }
+
+        else {
+            this.appendChild(draggedPiece);
+            console.log('dropped');
+            this.zoneTaken = true;
+
+            originalZone.zoneTaken = false;
+        }
+        
     }
 
     theButtons.forEach(button => button.addEventListener('click', changeBGimage));
